@@ -1,4 +1,4 @@
-SOURCE=encrypt.cpp
+SOURCE=main.cpp
 TARGET=run
 
 all: build run
