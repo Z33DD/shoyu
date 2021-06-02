@@ -10,4 +10,4 @@ run:
 	./$(TARGET)
 
 clean:
-	rm decypted.txt encrypted.bin $(TARGET)
+	rm decrypted.txt encrypted.bin $(TARGET)
