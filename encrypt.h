@@ -12,7 +12,7 @@ encrypt(const char *target_file, const char *source_file,
     unsigned char header[crypto_secretstream_xchacha20poly1305_HEADERBYTES];
     crypto_secretstream_xchacha20poly1305_state st;
     FILE *fpTarget, *fpSource;
-    unsigned long long out_len;
+    unsigned long long outLen;
     size_t rlen;
     int eof;
     unsigned char tag;
@@ -25,12 +25,12 @@ encrypt(const char *target_file, const char *source_file,
 
     do
     {
-        rlen = fread(bufferIn, 1, sizeof bufferIn, fpSource);
+        rlen = fread(bufferIn, 1, sizeof(bufferIn), fpSource);
         eof = feof(fpSource);
         tag = eof ? crypto_secretstream_xchacha20poly1305_TAG_FINAL : 0;
-        crypto_secretstream_xchacha20poly1305_push(&st, bufferOut, &out_len, bufferIn, rlen,
+        crypto_secretstream_xchacha20poly1305_push(&st, bufferOut, &outLen, bufferIn, rlen,
                                                    NULL, 0, tag);
-        fwrite(bufferOut, 1, (size_t)out_len, fpTarget);
+        fwrite(bufferOut, 1, (size_t)outLen, fpTarget);
     } while (!eof);
 
     fclose(fpTarget);
