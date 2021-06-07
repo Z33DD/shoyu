@@ -22,7 +22,7 @@ shoyu::~shoyu()
 
 void shoyu::on_Iniciar_clicked()
 {
-    QString caminho = ui->caminho->text();
+    QString caminho = ui->caminho->text().sliced(7);
     QString pass = ui->password->text();
     if (ui->criptografa->isChecked()) {
         bool criptografa = true;
