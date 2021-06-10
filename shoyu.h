@@ -16,13 +16,7 @@ public:
     ~shoyu();
 
 private slots:
-    void on_Iniciar_clicked();
-
-    void on_unidades_textActivated(const QString &arg1);
-
-    void on_pastas_doubleClicked(const QModelIndex &index);
-
-    void on_pastas_currentTextChanged(const QString &currentText);
+    void on_iniciarButton_clicked();
 
 private:
     Ui::shoyu *ui;
