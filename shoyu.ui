@@ -6,88 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>296</width>
+    <height>197</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>shoyu</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="erro">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>326</y>
-      <width>291</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>571</width>
-      <height>281</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QLabel" name="hello">
-       <property name="text">
-        <string>Shoyu - Criptografia</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="unidades"/>
-     </item>
-     <item>
-      <widget class="QListWidget" name="pastas"/>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QLineEdit" name="caminho"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="Iniciar">
-         <property name="minimumSize">
-          <size>
-           <width>80</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Iniciar</string>
-         </property>
-         <property name="autoDefault">
-          <bool>false</bool>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>310</y>
       <width>271</width>
-      <height>60</height>
+      <height>68</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -97,6 +30,9 @@
         <widget class="QLineEdit" name="password">
          <property name="inputMethodHints">
           <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+         </property>
+         <property name="text">
+          <string/>
          </property>
          <property name="echoMode">
           <enum>QLineEdit::Password</enum>
@@ -128,14 +64,40 @@
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="iniciarButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>110</y>
+      <width>80</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Shoyu!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="erro">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>90</y>
+      <width>56</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>22</height>
+     <width>296</width>
+     <height>27</height>
     </rect>
    </property>
   </widget>

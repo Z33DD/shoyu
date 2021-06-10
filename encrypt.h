@@ -1,5 +1,4 @@
 #include <sodium.h>
-#include <stdio.h>
 
 #define BUFFER_SIZE 4096
 

@@ -1,3 +1,5 @@
 /decrypted.txt
 /encrypted.bin
 /run
+*.o
+*.so
