@@ -8,7 +8,7 @@
 #define BUFFER_SIZE 4096
 
 
-
+/*
 int main(void)
 {
     // https://doc.libsodium.org/secret-key_cryptography/secretstream#example-stream-encryption
@@ -23,7 +23,7 @@ int main(void)
                       crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
                       crypto_pwhash_ALG_DEFAULT) != 0)
     {
-        /* out of memory */
+
     }
 
     if (sodium_init() != 0)
@@ -42,4 +42,4 @@ int main(void)
     }
     return 0;
 
-}
+}*/

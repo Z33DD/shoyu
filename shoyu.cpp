@@ -1,15 +1,14 @@
 #include "shoyu.h"
 #include "ui_shoyu.h"
 
-#include <sodium.h>
-
-
 #include <QDir>
 #include <QFileDialog>
 
 #include "decrypt.h"
 #include "encrypt.h"
 #include "key.h"
+
+#define EXTENSION ".crypt"
 
 shoyu::shoyu(QWidget *parent)
     : QMainWindow(parent)
@@ -20,7 +19,6 @@ shoyu::shoyu(QWidget *parent)
 
 shoyu::~shoyu()
 {
-    sodium_init();
     delete ui;
 }
 
@@ -28,6 +26,7 @@ shoyu::~shoyu()
 void shoyu::on_iniciarButton_clicked()
 {
     QString fileName;
+    QString ext = EXTENSION;
     fileName = QFileDialog::getOpenFileName(this, tr("Abra o arquivo"));
 
     QString pass = ui->password->text();
@@ -37,10 +36,18 @@ void shoyu::on_iniciarButton_clicked()
     key = generateKeyFromString(passBytesArray.data());
 
     if (ui->criptografa->isChecked()) {
-        encrypt(fileName.toStdString().c_str(), fileName.toStdString().c_str(), key);
+        std::string sourceFile = fileName.toStdString();
+        std::string targetFile = fileName.append(ext).toStdString();
+
+        encrypt(targetFile.c_str(), sourceFile.c_str(), key);
     }
     else if (ui->desincriptografa->isChecked()) {
-        decrypt(fileName.toStdString().c_str(), fileName.toStdString().c_str(), key);
+        std::string sourceFile = fileName.toStdString();
+
+        fileName.chop(ext.size());
+        std::string targetFile = fileName.toStdString();
+
+        decrypt(targetFile.c_str(), sourceFile.c_str(), key);
     }
     else {
         ui->erro->setText("Necessário escolher uma alternativa");

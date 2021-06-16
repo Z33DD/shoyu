@@ -40,7 +40,7 @@ DISTNAME      = shoyu1.0.0
 DISTDIR = /home/z33dd/Codes/shoyu/.tmp/shoyu1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) /usr/lib/libsodium.so /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -52,9 +52,11 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = main.cpp \
+SOURCES       = encrypt.cpp \
+		main.cpp \
 		shoyu.cpp moc_shoyu.cpp
-OBJECTS       = main.o \
+OBJECTS       = encrypt.o \
+		main.o \
 		shoyu.o \
 		moc_shoyu.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
@@ -284,11 +286,13 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_Solid.pri \
 		/usr/lib/qt/mkspecs/modules/qt_SonnetCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_SonnetUi.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Syndication.pri \
 		/usr/lib/qt/mkspecs/modules/qt_ThreadWeaver.pri \
 		/usr/lib/qt/mkspecs/features/qt_functions.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -308,7 +312,11 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		shoyu.pro shoyu.h main.cpp \
+		shoyu.pro decrypt.h \
+		encrypt.h \
+		fiile.h \
+		shoyu.h encrypt.cpp \
+		main.cpp \
 		shoyu.cpp
 QMAKE_TARGET  = shoyu
 DESTDIR       = 
@@ -548,11 +556,13 @@ Makefile: shoyu.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs
 		/usr/lib/qt/mkspecs/modules/qt_Solid.pri \
 		/usr/lib/qt/mkspecs/modules/qt_SonnetCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_SonnetUi.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Syndication.pri \
 		/usr/lib/qt/mkspecs/modules/qt_ThreadWeaver.pri \
 		/usr/lib/qt/mkspecs/features/qt_functions.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -801,11 +811,13 @@ Makefile: shoyu.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs
 /usr/lib/qt/mkspecs/modules/qt_Solid.pri:
 /usr/lib/qt/mkspecs/modules/qt_SonnetCore.pri:
 /usr/lib/qt/mkspecs/modules/qt_SonnetUi.pri:
+/usr/lib/qt/mkspecs/modules/qt_Syndication.pri:
 /usr/lib/qt/mkspecs/modules/qt_ThreadWeaver.pri:
 /usr/lib/qt/mkspecs/features/qt_functions.prf:
 /usr/lib/qt/mkspecs/features/qt_config.prf:
 /usr/lib/qt/mkspecs/linux-g++/qmake.conf:
 /usr/lib/qt/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/qt/mkspecs/features/exclusive_builds.prf:
 /usr/lib/qt/mkspecs/features/toolchain.prf:
 /usr/lib/qt/mkspecs/features/default_pre.prf:
@@ -841,8 +853,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents shoyu.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp shoyu.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents decrypt.h encrypt.h fiile.h shoyu.h $(DISTDIR)/
+	$(COPY_FILE) --parents encrypt.cpp main.cpp shoyu.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents shoyu.ui $(DISTDIR)/
 
 
@@ -903,6 +915,10 @@ compiler_lex_clean:
 compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
+
+encrypt.o: encrypt.cpp encrypt.h \
+		decrypt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o encrypt.o encrypt.cpp
 
 main.o: main.cpp shoyu.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
