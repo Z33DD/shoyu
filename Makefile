@@ -40,7 +40,7 @@ DISTNAME      = shoyu1.0.0
 DISTDIR = /home/z33dd/Codes/shoyu/.tmp/shoyu1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /usr/lib/libsodium.so /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -314,7 +314,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
 		shoyu.pro decrypt.h \
 		encrypt.h \
-		fiile.h \
+		key.h \
 		shoyu.h encrypt.cpp \
 		main.cpp \
 		shoyu.cpp
@@ -853,7 +853,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents decrypt.h encrypt.h fiile.h shoyu.h $(DISTDIR)/
+	$(COPY_FILE) --parents decrypt.h encrypt.h key.h shoyu.h $(DISTDIR)/
 	$(COPY_FILE) --parents encrypt.cpp main.cpp shoyu.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents shoyu.ui $(DISTDIR)/
 

@@ -3,6 +3,8 @@
 
 #include <QDir>
 #include <QFileDialog>
+#include <sodium.h>
+#include <stdio.h>
 
 #include "decrypt.h"
 #include "encrypt.h"
@@ -29,19 +31,29 @@ void shoyu::on_iniciarButton_clicked()
     QString ext = EXTENSION;
     fileName = QFileDialog::getOpenFileName(this, tr("Abra o arquivo"));
 
-    QString pass = ui->password->text();
-    unsigned char *key;
-    QByteArray passBytesArray = pass.toUtf8();
+    unsigned char key[crypto_secretstream_xchacha20poly1305_KEYBYTES];
 
-    key = generateKeyFromString(passBytesArray.data());
+    FILE *keyfile;
 
     if (ui->criptografa->isChecked()) {
+        crypto_secretstream_xchacha20poly1305_keygen(key);
+
         std::string sourceFile = fileName.toStdString();
         std::string targetFile = fileName.append(ext).toStdString();
+
+        keyfile = fopen("key", "wb");
+        fwrite(key, sizeof(unsigned char), crypto_secretstream_xchacha20poly1305_KEYBYTES, keyfile);
+        fclose(keyfile);
 
         encrypt(targetFile.c_str(), sourceFile.c_str(), key);
     }
     else if (ui->desincriptografa->isChecked()) {
+        keyfile = fopen("key", "r");
+
+        fread(key, crypto_secretstream_xchacha20poly1305_KEYBYTES +1, 1, keyfile);
+        fclose(keyfile);
+        printf("key: %s\n", key);
+
         std::string sourceFile = fileName.toStdString();
 
         fileName.chop(ext.size());

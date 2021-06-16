@@ -1,4 +1,6 @@
 #include <sodium.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define BUFFER_SIZE 4096
 
@@ -6,21 +8,26 @@ static int
 encrypt(const char *target_file, const char *source_file,
         const unsigned char key[crypto_secretstream_xchacha20poly1305_KEYBYTES])
 {
+    printf("Início da função\n");
     unsigned char bufferIn[BUFFER_SIZE];
     unsigned char bufferOut[BUFFER_SIZE + crypto_secretstream_xchacha20poly1305_ABYTES];
     unsigned char header[crypto_secretstream_xchacha20poly1305_HEADERBYTES];
-    crypto_secretstream_xchacha20poly1305_state st;
     FILE *fpTarget, *fpSource;
     unsigned long long outLen;
     size_t rlen;
     int eof;
     unsigned char tag;
+    printf("As variáveis foram definidas\n");
+
 
     fpSource = fopen(source_file, "rb");
     fpTarget = fopen(target_file, "wb");
+    printf("Os Arquivos foram abertos\n");
 
+    crypto_secretstream_xchacha20poly1305_state st;
     crypto_secretstream_xchacha20poly1305_init_push(&st, header, key);
     fwrite(header, 1, sizeof header, fpTarget);
+    printf("Primeiras funções criptográficas executadas e o header escrito\n");
 
     do
     {

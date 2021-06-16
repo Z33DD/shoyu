@@ -16,6 +16,7 @@ SOURCES += \
 HEADERS += \
     decrypt.h \
     encrypt.h \
+    key.h \
     shoyu.h
 
 FORMS += \
