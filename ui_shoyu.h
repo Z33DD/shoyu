@@ -13,7 +13,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -31,7 +30,6 @@ public:
     QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_3;
     QVBoxLayout *verticalLayout;
-    QLineEdit *password;
     QHBoxLayout *horizontalLayout_2;
     QRadioButton *criptografa;
     QRadioButton *desincriptografa;
@@ -44,7 +42,7 @@ public:
     {
         if (shoyu->objectName().isEmpty())
             shoyu->setObjectName(QString::fromUtf8("shoyu"));
-        shoyu->resize(296, 197);
+        shoyu->resize(296, 162);
         centralwidget = new QWidget(shoyu);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         layoutWidget = new QWidget(centralwidget);
@@ -55,13 +53,6 @@ public:
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        password = new QLineEdit(layoutWidget);
-        password->setObjectName(QString::fromUtf8("password"));
-        password->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
-        password->setEchoMode(QLineEdit::Password);
-
-        verticalLayout->addWidget(password);
-
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         criptografa = new QRadioButton(layoutWidget);
@@ -82,7 +73,7 @@ public:
 
         iniciarButton = new QPushButton(centralwidget);
         iniciarButton->setObjectName(QString::fromUtf8("iniciarButton"));
-        iniciarButton->setGeometry(QRect(100, 110, 80, 30));
+        iniciarButton->setGeometry(QRect(100, 90, 80, 30));
         erro = new QLabel(centralwidget);
         erro->setObjectName(QString::fromUtf8("erro"));
         erro->setGeometry(QRect(110, 90, 56, 17));
@@ -103,8 +94,6 @@ public:
     void retranslateUi(QMainWindow *shoyu)
     {
         shoyu->setWindowTitle(QCoreApplication::translate("shoyu", "shoyu", nullptr));
-        password->setText(QString());
-        password->setPlaceholderText(QCoreApplication::translate("shoyu", "password", nullptr));
         criptografa->setText(QCoreApplication::translate("shoyu", "Criptografar", nullptr));
         desincriptografa->setText(QCoreApplication::translate("shoyu", "Desincriptografar", nullptr));
         iniciarButton->setText(QCoreApplication::translate("shoyu", "Shoyu!", nullptr));

@@ -50,5 +50,14 @@ decrypt(const char *target_file, const char *source_file,
 ret:
     fclose(fpTarget);
     fclose(fpSource);
+
+    if (remove(source_file) != 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
     return ret;
 }

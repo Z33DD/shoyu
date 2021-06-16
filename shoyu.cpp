@@ -8,7 +8,6 @@
 
 #include "decrypt.h"
 #include "encrypt.h"
-#include "key.h"
 
 #define EXTENSION ".crypt"
 
